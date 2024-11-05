@@ -1,7 +1,7 @@
 package com.desafiovotacao.api.v1.controllers;
 
 import com.desafiovotacao.api.v1.dtos.SessionDTO;
-import com.desafiovotacao.api.v1.entities.SessionEntity;
+import com.desafiovotacao.api.v1.dtos.responses.SessionResponseDTO;
 import com.desafiovotacao.api.v1.services.SessionService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -21,9 +21,9 @@ public class SessionController {
     @PostMapping
     public ResponseEntity<Object> create(@Valid @RequestBody SessionDTO sessionDTO) {
         try {
-            SessionEntity session = sessionService.create(sessionDTO);
+            SessionResponseDTO responseDTO = sessionService.create(sessionDTO);
 
-            return ResponseEntity.status(HttpStatus.CREATED).body(session);
+            return ResponseEntity.status(HttpStatus.CREATED).body(responseDTO);
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }

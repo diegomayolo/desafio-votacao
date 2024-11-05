@@ -7,7 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
-import java.time.Instant;
+import java.time.LocalDateTime;
 
 @Table(name = "associates")
 @Entity
@@ -25,5 +25,5 @@ public class AssociateEntity
     private String cpf;
     
     @CreationTimestamp
-    private Instant createdAt;
+    private LocalDateTime createdAt;
 }

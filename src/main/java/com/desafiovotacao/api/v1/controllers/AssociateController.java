@@ -1,6 +1,7 @@
 package com.desafiovotacao.api.v1.controllers;
 
 import com.desafiovotacao.api.v1.dtos.AssociateDTO;
+import com.desafiovotacao.api.v1.dtos.responses.AssociateResponseDTO;
 import com.desafiovotacao.api.v1.entities.AssociateEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,9 +22,9 @@ public class AssociateController
     public ResponseEntity<Object> create(@Valid @RequestBody AssociateDTO associateDTO)
     {
         try {
-            AssociateEntity associateEntity = associateService.create(associateDTO);
+            AssociateResponseDTO responseDTO = associateService.create(associateDTO);
 
-            return ResponseEntity.status(HttpStatus.CREATED).body(associateEntity);
+            return ResponseEntity.status(HttpStatus.CREATED).body(responseDTO);
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }

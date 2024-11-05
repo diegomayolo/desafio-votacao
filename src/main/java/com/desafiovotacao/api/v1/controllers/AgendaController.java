@@ -1,7 +1,7 @@
 package com.desafiovotacao.api.v1.controllers;
 
 import com.desafiovotacao.api.v1.dtos.AgendaDTO;
-import com.desafiovotacao.api.v1.entities.AgendaEntity;
+import com.desafiovotacao.api.v1.dtos.responses.AgendaResponseDTO;
 import com.desafiovotacao.api.v1.services.AgendaService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -21,9 +21,9 @@ public class AgendaController {
     @PostMapping
     public ResponseEntity<Object> create(@Valid @RequestBody AgendaDTO agendaDTO) {
         try {
-            AgendaEntity agendaEntity = agendaService.create(agendaDTO);
+            AgendaResponseDTO responseDTO = agendaService.create(agendaDTO);
 
-            return ResponseEntity.status(HttpStatus.CREATED).body(agendaEntity);
+            return ResponseEntity.status(HttpStatus.CREATED).body(responseDTO);
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }

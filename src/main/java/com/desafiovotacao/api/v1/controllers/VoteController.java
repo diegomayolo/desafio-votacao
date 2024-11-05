@@ -1,7 +1,7 @@
 package com.desafiovotacao.api.v1.controllers;
 
 import com.desafiovotacao.api.v1.dtos.VoteDTO;
-import com.desafiovotacao.api.v1.entities.VoteEntity;
+import com.desafiovotacao.api.v1.dtos.responses.VoteResponseDTO;
 import com.desafiovotacao.api.v1.services.VoteService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -21,9 +21,9 @@ public class VoteController {
     @PostMapping
     public ResponseEntity<Object> create(@Valid @RequestBody VoteDTO voteDTO) {
         try {
-            VoteEntity vote = voteService.create(voteDTO);
+            VoteResponseDTO responseDTO = voteService.create(voteDTO);
 
-            return ResponseEntity.status(HttpStatus.CREATED).body(vote);
+            return ResponseEntity.status(HttpStatus.CREATED).body(responseDTO);
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
