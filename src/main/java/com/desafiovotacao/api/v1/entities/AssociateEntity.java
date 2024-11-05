@@ -9,7 +9,7 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.Instant;
 
-@Table(name = "associate")
+@Table(name = "associates")
 @Entity
 @Data
 @Builder
