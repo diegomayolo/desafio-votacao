@@ -1,19 +1,13 @@
 package com.desafiovotacao.api.v1.entities;
 
-import java.time.Instant;
-
-import org.hibernate.annotations.CreationTimestamp;
-
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotBlank;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
+
+import java.time.Instant;
 
 @Table(name = "associate")
 @Entity
@@ -27,10 +21,7 @@ public class AssociateEntity
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     
-    @NotBlank(message = "Preencha o campo 'name'")
     private String name;
-    
-    @NotBlank(message = "Preencha o campo 'cpf'")
     private String cpf;
     
     @CreationTimestamp

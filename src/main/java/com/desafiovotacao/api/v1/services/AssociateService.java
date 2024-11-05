@@ -6,10 +6,9 @@ import com.desafiovotacao.api.v1.exceptions.AssociateFoundException;
 import com.desafiovotacao.api.v1.exceptions.AssociateNotFoundException;
 import com.desafiovotacao.api.v1.exceptions.InvalidCpfException;
 import com.desafiovotacao.api.v1.repositories.AssociateRepository;
-import org.springframework.stereotype.Service;
-
 import com.desafiovotacao.utils.CpfUtilities;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
@@ -18,7 +17,7 @@ public class AssociateService
     private final AssociateRepository associateRepository;
     
     public AssociateEntity create(AssociateDTO associateDTO){
-        String cpf = associateDTO.cpf();
+        String cpf = associateDTO.getCpf();
         
         associateRepository.findByCpf(cpf)
                            .ifPresent(associate -> {
@@ -31,8 +30,8 @@ public class AssociateService
         }
 
         AssociateEntity associate = AssociateEntity.builder()
-                                                   .name(associateDTO.name())
-                                                   .cpf(associateDTO.cpf())
+                                                   .name(associateDTO.getName())
+                                                   .cpf(associateDTO.getCpf())
                                                    .build();
         
         associateRepository.save(associate);
