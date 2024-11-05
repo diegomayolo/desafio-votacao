@@ -2,6 +2,9 @@ package com.desafiovotacao.api.v1.services;
 
 import com.desafiovotacao.api.v1.dtos.AssociateDTO;
 import com.desafiovotacao.api.v1.entities.AssociateEntity;
+import com.desafiovotacao.api.v1.exceptions.AssociateFoundException;
+import com.desafiovotacao.api.v1.exceptions.AssociateNotFoundException;
+import com.desafiovotacao.api.v1.exceptions.InvalidCpfException;
 import com.desafiovotacao.api.v1.repositories.AssociateRepository;
 import org.springframework.stereotype.Service;
 
@@ -19,12 +22,12 @@ public class AssociateService
         
         associateRepository.findByCpf(cpf)
                            .ifPresent(associate -> {
-                               throw new RuntimeException( "CPF já cadastrado");
+                               throw new AssociateFoundException();
                            });
         
         if(!CpfUtilities.isValidCpf(cpf))
         {
-            throw new RuntimeException( "CPF inválido");
+            throw new InvalidCpfException();
         }
 
         AssociateEntity associate = AssociateEntity.builder()
@@ -38,6 +41,6 @@ public class AssociateService
     }
 
     public AssociateEntity findById(Integer associateId) {
-        return this.associateRepository.findById(associateId).orElseThrow(() -> new RuntimeException("Associado não encontrado"));
+        return this.associateRepository.findById(associateId).orElseThrow(() -> new AssociateNotFoundException());
     }
 }

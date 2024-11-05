@@ -20,17 +20,28 @@ public class AssociateController
     @PostMapping
     public ResponseEntity<Object> create(@Valid @RequestBody AssociateDTO associateDTO)
     {
-        return new ResponseEntity<>( associateService.create( associateDTO ), HttpStatus.CREATED );
+        try {
+            AssociateEntity associateEntity = associateService.create(associateDTO);
+
+            return ResponseEntity.status(HttpStatus.CREATED).body(associateEntity);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<AssociateEntity> findById(@PathVariable Integer id) {
-        AssociateEntity associate = associateService.findById(id);
-        
-        if (associate == null) {
-            return ResponseEntity.notFound().build();
+    public ResponseEntity<Object> findById(@PathVariable Integer id) {
+     
+        try {
+            AssociateEntity associate = associateService.findById(id);
+
+            if (associate == null) {
+                return ResponseEntity.notFound().build();
+            }
+
+            return ResponseEntity.ok(associate);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
         }
-        
-        return ResponseEntity.ok(associate);
     }
 }
