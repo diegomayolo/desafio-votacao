@@ -3,6 +3,8 @@ package com.desafiovotacao.api.v1.controllers;
 import com.desafiovotacao.api.v1.dtos.AgendaDTO;
 import com.desafiovotacao.api.v1.dtos.responses.AgendaResponseDTO;
 import com.desafiovotacao.api.v1.services.AgendaService;
+import io.micrometer.core.annotation.Counted;
+import io.micrometer.core.annotation.Timed;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -16,6 +18,8 @@ public class AgendaController {
     private final AgendaService agendaService;
     
     @PostMapping
+    @Counted(value = "agenda.count", description = "Contagem total de pautas")
+    @Timed(value = "agenda.timed", longTask = true, description = "Tempo de processamento para o cadastro de uma pauta")
     public ResponseEntity<Object> create(@Valid @RequestBody AgendaDTO agendaDTO) {
         try {
             AgendaResponseDTO responseDTO = agendaService.create(agendaDTO);

@@ -3,6 +3,8 @@ package com.desafiovotacao.api.v1.controllers;
 import com.desafiovotacao.api.v1.dtos.SessionDTO;
 import com.desafiovotacao.api.v1.dtos.responses.SessionResponseDTO;
 import com.desafiovotacao.api.v1.services.SessionService;
+import io.micrometer.core.annotation.Counted;
+import io.micrometer.core.annotation.Timed;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -19,6 +21,8 @@ public class SessionController {
     private final SessionService sessionService;
     
     @PostMapping
+    @Counted(value = "session.count", description = "Contagem total de sessões")
+    @Timed(value = "session.timed", longTask = true, description = "Tempo de processamento para o cadastro de uma sessão")
     public ResponseEntity<Object> create(@Valid @RequestBody SessionDTO sessionDTO) {
         try {
             SessionResponseDTO responseDTO = sessionService.create(sessionDTO);

@@ -3,6 +3,8 @@ package com.desafiovotacao.api.v1.controllers;
 import com.desafiovotacao.api.v1.dtos.AssociateDTO;
 import com.desafiovotacao.api.v1.dtos.responses.AssociateResponseDTO;
 import com.desafiovotacao.api.v1.entities.AssociateEntity;
+import io.micrometer.core.annotation.Counted;
+import io.micrometer.core.annotation.Timed;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +21,8 @@ public class AssociateController
     private final AssociateService associateService;
     
     @PostMapping
+    @Counted(value = "associate.count", description = "Contagem total de associados")
+    @Timed(value = "associate.timed", longTask = true, description = "Tempo de processamento para o cadastro de um associado")
     public ResponseEntity<Object> create(@Valid @RequestBody AssociateDTO associateDTO)
     {
         try {
