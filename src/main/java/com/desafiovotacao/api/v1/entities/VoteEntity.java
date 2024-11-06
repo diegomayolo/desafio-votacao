@@ -6,7 +6,12 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Table(name = "votes")
+@Table(
+        name = "votes",
+        uniqueConstraints = {
+                @UniqueConstraint(columnNames = {"associate_id", "agenda_id"})
+        }
+)
 @Entity
 @Data
 @Builder
@@ -17,6 +22,12 @@ public class VoteEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private Boolean vote;
-    private Integer associateId;
-    private Integer agendaId;
+    
+    @ManyToOne
+    @JoinColumn(name = "associate_id")
+    private AssociateEntity associate;
+
+    @ManyToOne
+    @JoinColumn(name = "agenda_id")
+    private AgendaEntity agenda;
 }

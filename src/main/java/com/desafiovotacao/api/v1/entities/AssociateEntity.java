@@ -15,15 +15,17 @@ import java.time.LocalDateTime;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class AssociateEntity
-{
+public class AssociateEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     
     private String name;
+
+    @Column(name = "cpf", nullable = false, unique = true)
     private String cpf;
     
     @CreationTimestamp
+    @Column(name = "created_at", updatable = false)
     private LocalDateTime createdAt;
 }
