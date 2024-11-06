@@ -8,4 +8,5 @@ import java.util.List;
 
 public interface SessionRepository extends JpaRepository<SessionEntity, Integer>{
     List<SessionEntity> findByAgendaIdAndEndTimeAfter(Integer agendaId, LocalDateTime now);
+    SessionEntity findByAgendaId(Integer integer);
 }
