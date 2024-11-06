@@ -51,4 +51,17 @@ public class AgendaService {
                                            entities.size(),
                                            result);
     }
+
+    public AgendaResponseDTO findById(Integer agendaId) {
+        AgendaEntity agenda = agendaRepository.findById(agendaId)
+                                              .orElseThrow(() -> new AgendaNotFoundException());
+
+        return AgendaMapper.toResponseDTO(agenda);
+    }
+    
+    public List<AgendaResponseDTO> listAll() {
+        List<AgendaEntity> agendas = agendaRepository.findAll();
+
+        return AgendaMapper.toResponseDTOList(agendas);
+    }
 }
