@@ -6,6 +6,7 @@ import com.desafiovotacao.api.v1.entities.AgendaEntity;
 import com.desafiovotacao.api.v1.entities.SessionEntity;
 import com.desafiovotacao.api.v1.exceptions.ActiveSessionException;
 import com.desafiovotacao.api.v1.exceptions.AgendaNotFoundException;
+import com.desafiovotacao.api.v1.exceptions.SessionNotFoundException;
 import com.desafiovotacao.api.v1.mappers.SessionMapper;
 import com.desafiovotacao.api.v1.repositories.AgendaRepository;
 import com.desafiovotacao.api.v1.repositories.SessionRepository;
@@ -25,17 +26,28 @@ public class SessionService {
         AgendaEntity agenda = checkExistingAgenda(sessionDTO);
         checkActiveSessions(sessionDTO);
 
-        SessionEntity entity = sessionRepository.save(SessionEntity.builder()
-                                                                   .agenda(agenda)
-                                                                   .duration(sessionDTO.duration())
-                                                                   .build());
+        SessionEntity session = sessionRepository.save(SessionEntity.builder()
+                                                                    .agenda(agenda)
+                                                                    .duration(sessionDTO.duration())
+                                                                    .build());
 
-        return SessionMapper.toResponseDTO(entity);
+        return SessionMapper.toResponseDTO(session);
     }
 
+    public SessionResponseDTO findById(Integer sessionId) {
+        SessionEntity session = sessionRepository.findById(sessionId)
+                                                 .orElseThrow(() -> new SessionNotFoundException());
+        
+        return SessionMapper.toResponseDTO(session);
+    }
+
+    public List<SessionResponseDTO> listAll() {
+        return SessionMapper.toResponseDTOList(sessionRepository.findAll());
+    }
+    
     private AgendaEntity checkExistingAgenda(SessionDTO sessionDTO) {
         return agendaRepository.findById(sessionDTO.agendaId())
-                .orElseThrow(() -> new AgendaNotFoundException());
+                               .orElseThrow(() -> new AgendaNotFoundException());
     }
 
     private void checkActiveSessions(SessionDTO sessionDTO) {
