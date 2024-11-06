@@ -1,7 +1,13 @@
 package com.desafiovotacao.utils;
 
+import java.util.Random;
+
 public class CpfUtilities
 {
+    public static boolean randomValidCpf(String cpf) {
+        return new Random().nextBoolean();
+    }
+    
     public static boolean isValidCpf(String cpf) {
         if (cpf == null || !cpf.matches("\\d{11}|\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}|\\d{3}\\/\\d{3}\\/\\d{3}\\s*\\d{2}")) {
             return false;
