@@ -12,6 +12,8 @@ import com.desafiovotacao.utils.CpfUtilities;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class AssociateService
@@ -39,7 +41,16 @@ public class AssociateService
         return AssociateMapper.toResponseDTO(entity);
     }
 
-    public AssociateEntity findById(Integer associateId) {
-        return this.associateRepository.findById(associateId).orElseThrow(() -> new AssociateNotFoundException());
+    public AssociateResponseDTO findById(Integer associateId) {
+        AssociateEntity associate = associateRepository.findById(associateId)
+                                                       .orElseThrow(() -> new AssociateNotFoundException());
+
+        return AssociateMapper.toResponseDTO(associate);
+    }
+
+    public List<AssociateResponseDTO> listAll() {
+        List<AssociateEntity> associates = associateRepository.findAll();
+
+        return AssociateMapper.toResponseDTOList(associates);
     }
 }

@@ -13,6 +13,8 @@ import com.desafiovotacao.api.v1.services.AssociateService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/v1/associate")
 @RequiredArgsConstructor
@@ -35,18 +37,30 @@ public class AssociateController
     }
 
     @GetMapping("/{id}")
+    @Counted(value = "associate.count.get.by.id", description = "Contagem total de associados buscados por id")
+    @Timed(value = "associate.timed.get.by.id", longTask = true, description = "Tempo de processamento para buscar um associado por id")
     public ResponseEntity<Object> findById(@PathVariable Integer id) {
      
         try {
-            AssociateEntity associate = associateService.findById(id);
+            AssociateResponseDTO responseDTO = associateService.findById(id);
 
-            if (associate == null) {
-                return ResponseEntity.notFound().build();
-            }
-
-            return ResponseEntity.ok(associate);
+            return ResponseEntity.ok(responseDTO);
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
+    
+    @GetMapping
+    @Counted(value = "associate.count.get.all", description = "Contagem total que todas os associados foram buscados")
+    @Timed(value = "associate.timed.get.all", longTask = true, description = "Tempo de processamento para buscar todos os associados")
+    public ResponseEntity<Object> listAll() {
+        try {
+            List<AssociateResponseDTO> responseDTOS = associateService.listAll();
+            
+            return ResponseEntity.ok(responseDTOS);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+    
 }
