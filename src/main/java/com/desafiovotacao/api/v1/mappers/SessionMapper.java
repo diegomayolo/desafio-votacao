@@ -7,7 +7,7 @@ import java.util.List;
 
 public class SessionMapper {
     public static SessionResponseDTO toResponseDTO(SessionEntity session) {
-        return new SessionResponseDTO(session.getId(),
+        return new SessionResponseDTO(session.getAgenda().getId(),
                                       session.getDuration(),
                                       session.getStartTime(),
                                       session.getEndTime());
