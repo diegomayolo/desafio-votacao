@@ -1,4 +1,4 @@
-package com.desafiovotacao.api.v1.enums;
+package com.desafiovotacao.api.v1.client.enums;
 
 public enum VotingEligibilityEnum {
     ABLE_TO_VOTE,

@@ -1,7 +1,7 @@
 package com.desafiovotacao.api.v1.client.services;
 
 import com.desafiovotacao.api.v1.client.dtos.FakeCPFDTO;
-import com.desafiovotacao.api.v1.enums.VotingEligibilityEnum;
+import com.desafiovotacao.api.v1.client.enums.VotingEligibilityEnum;
 import com.desafiovotacao.utils.CpfUtilities;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -1,6 +1,6 @@
 package com.desafiovotacao.api.v1.client.dtos;
 
-import com.desafiovotacao.api.v1.enums.VotingEligibilityEnum;
+import com.desafiovotacao.api.v1.client.enums.VotingEligibilityEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 public record FakeCPFDTO(
