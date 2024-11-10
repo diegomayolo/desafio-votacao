@@ -41,7 +41,7 @@ public class AssociateControllerTest {
     @BeforeEach
     void setUp() {
         final String name = "Associado Teste";
-        final String cpf = "025.212.130-98";
+        final String cpf = "02521213098";
         final LocalDateTime date = LocalDateTime.of(2023, 11, 8, 07, 00, 00);
 
         associateDTO = AssociateDTO.builder().name(name).cpf(cpf).build();
