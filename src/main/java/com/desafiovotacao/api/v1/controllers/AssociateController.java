@@ -2,29 +2,30 @@ package com.desafiovotacao.api.v1.controllers;
 
 import com.desafiovotacao.api.v1.dtos.AssociateDTO;
 import com.desafiovotacao.api.v1.dtos.responses.AssociateResponseDTO;
-import com.desafiovotacao.api.v1.dtos.responses.VoteResponseDTO;
-import com.desafiovotacao.api.v1.entities.AssociateEntity;
+import com.desafiovotacao.api.v1.services.AssociateService;
 import io.micrometer.core.annotation.Counted;
 import io.micrometer.core.annotation.Timed;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.desafiovotacao.api.v1.services.AssociateService;
-import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
-
 import java.util.List;
 
+@Tag(
+        name = "Associados", 
+        description = "Gerencie e consulte informações dos associados para participação em votações."
+)
 @RestController
-@RequestMapping("/api/v1/associate")
 @RequiredArgsConstructor
+@RequestMapping("/api/v1/associate")
 public class AssociateController
 {
     private final AssociateService associateService;

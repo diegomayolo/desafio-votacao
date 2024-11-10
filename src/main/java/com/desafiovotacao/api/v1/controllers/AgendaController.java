@@ -11,6 +11,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -19,9 +20,14 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Tag(
+        name = "Pautas",
+        description = "Gerencia o ciclo de vida das pautas em assembleias, incluindo a criação, consulta, " +
+                      "e obtenção de resultados de pautas, bem como a listagem de todas as pautas cadastradas."
+)
 @RestController
-@RequestMapping("/api/v1/agenda")
 @RequiredArgsConstructor
+@RequestMapping("/api/v1/agenda")
 public class AgendaController {
     private final AgendaService agendaService;
     
