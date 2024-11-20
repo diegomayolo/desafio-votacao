@@ -28,7 +28,7 @@ import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 @DisplayName("SessionServiceTest")
-public class SessionServiceTest {
+class SessionServiceTest {
     private static final Integer MOCKED_ID = 1;
     private static final Integer MOCKED_DURATION = 60;
 
@@ -43,7 +43,7 @@ public class SessionServiceTest {
 
     @Test
     @DisplayName("Deve criar sessão com sucesso quando os dados são válidos")
-    public void createSession_Success_WhenValidInput() {
+    void createSession_Success_WhenValidInput() {
         AgendaEntity agendaEntity = new AgendaEntity();
         agendaEntity.setId(MOCKED_ID);
 
@@ -65,7 +65,7 @@ public class SessionServiceTest {
 
     @Test
     @DisplayName("Deve lançar AgendaNotFoundException se a agenda não for encontrada")
-    public void createSession_Fail_WhenAgendaNotFound() {
+    void createSession_Fail_WhenAgendaNotFound() {
         SessionDTO sessionDTO = new SessionDTO(MOCKED_ID, MOCKED_DURATION);
 
         when(agendaRepository.findById(MOCKED_ID)).thenReturn(Optional.empty());
@@ -75,7 +75,7 @@ public class SessionServiceTest {
 
     @Test
     @DisplayName("Deve lançar ActiveSessionException se já houver sessão ativa para a agenda")
-    public void createSession_Fail_WhenActiveSessionExists() {
+    void createSession_Fail_WhenActiveSessionExists() {
         AgendaEntity agendaEntity = buildAgendaEntity();
         SessionDTO sessionDTO = new SessionDTO(MOCKED_ID, MOCKED_DURATION);
 
@@ -88,7 +88,7 @@ public class SessionServiceTest {
 
     @Test
     @DisplayName("Deve retornar a sessão quando o ID existe")
-    public void findSessionById_Success_WhenSessionExists() {
+    void findSessionById_Success_WhenSessionExists() {
         SessionEntity sessionEntity = buildSessionEntity();
 
         when(sessionRepository.findById(MOCKED_ID)).thenReturn(Optional.of(sessionEntity));
@@ -100,7 +100,7 @@ public class SessionServiceTest {
 
     @Test
     @DisplayName("Deve lançar SessionNotFoundException se a sessão não for encontrada")
-    public void findSessionById_Fail_WhenSessionNotFound() {
+    void findSessionById_Fail_WhenSessionNotFound() {
         when(sessionRepository.findById(999)).thenReturn(Optional.empty());
 
         Assertions.assertThrows(SessionNotFoundException.class, () -> sessionService.findById(999));
@@ -108,7 +108,7 @@ public class SessionServiceTest {
 
     @Test
     @DisplayName("Deve listar todas as sessões com sucesso")
-    public void listAllSessions_Success_WhenRequested() {
+    void listAllSessions_Success_WhenRequested() {
         List<SessionEntity> sessionEntities = List.of(buildSessionEntity(), buildSessionEntity());
 
         when(sessionRepository.findAll()).thenReturn(sessionEntities);

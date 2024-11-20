@@ -36,7 +36,7 @@ public class AssociateService
 
     public AssociateResponseDTO findById(Integer associateId) {
         AssociateEntity associate = associateRepository.findById(associateId)
-                                                       .orElseThrow(() -> new AssociateNotFoundException());
+                                                       .orElseThrow(AssociateNotFoundException::new);
 
         return AssociateMapper.toResponseDTO(associate);
     }

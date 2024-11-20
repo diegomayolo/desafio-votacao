@@ -30,10 +30,10 @@ public class VoteService {
 
     public VoteResponseDTO create(VoteDTO voteDTO) {
         AssociateEntity associate = associateRepository.findById(voteDTO.associateId())
-                                                       .orElseThrow(() -> new AssociateNotFoundException());
+                                                       .orElseThrow(AssociateNotFoundException::new);
 
         AgendaEntity agenda = agendaRepository.findById(voteDTO.agendaId())
-                                              .orElseThrow(() -> new AgendaNotFoundException());
+                                              .orElseThrow(AgendaNotFoundException::new);
 
         validateVoteConditions(voteDTO);
 

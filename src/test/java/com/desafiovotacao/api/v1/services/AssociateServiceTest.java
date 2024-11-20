@@ -22,7 +22,7 @@ import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 @DisplayName("AssociateService Test")
-public class AssociateServiceTest {
+class AssociateServiceTest {
     
     private static final int MOCKED_ID1 = 1;
     private static final String MOCKED_NAME1 = "Usuário de Teste 1";
@@ -38,7 +38,7 @@ public class AssociateServiceTest {
 
     @Test
     @DisplayName("Deve criar associado com sucesso quando dados são válidos")
-    public void createAssociate_Success_WhenValidInput() {
+    void createAssociate_Success_WhenValidInput() {
         AssociateEntity associate = buildAssociate( MOCKED_NAME1, MOCKED_CPF1);
         AssociateDTO associateDTO = new AssociateDTO(MOCKED_NAME1, MOCKED_CPF1);
         
@@ -54,7 +54,7 @@ public class AssociateServiceTest {
 
     @Test
     @DisplayName("Não deve criar associado quando CPF já existe")
-    public void createAssociate_Fail_WhenCpfAlreadyExists() {
+    void createAssociate_Fail_WhenCpfAlreadyExists() {
         AssociateDTO associateDTO = new AssociateDTO(MOCKED_NAME1, MOCKED_CPF1);
 
         when(associateRepository.findByCpf(MOCKED_CPF1)).thenReturn(Optional.of(new AssociateEntity()));
@@ -64,7 +64,7 @@ public class AssociateServiceTest {
 
     @Test
     @DisplayName("Deve encontrar associado por ID quando ID existe")
-    public void findAssociateById_Success_WhenIdExists() {
+    void findAssociateById_Success_WhenIdExists() {
         AssociateEntity associateEntity = buildAssociate(MOCKED_NAME1, MOCKED_CPF1);
 
         when(associateRepository.findById(MOCKED_ID1)).thenReturn(Optional.of(associateEntity));
@@ -85,7 +85,7 @@ public class AssociateServiceTest {
 
     @Test
     @DisplayName("Deve buscar todos os associados")
-    public void findAllAssociates_Success_WhenRequested() {
+    void findAllAssociates_Success_WhenRequested() {
         List<AssociateEntity> associateEntities = List.of(
                 buildAssociate(MOCKED_NAME1, MOCKED_CPF1),
                 buildAssociate(MOCKED_NAME2, MOCKED_CPF2)

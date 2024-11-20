@@ -14,7 +14,7 @@ import java.util.Optional;
 @DataJpaTest
 @DisplayName("AssociateRepository Test")
 @RequiredArgsConstructor
-public class AssociateRepositoryTest {
+class AssociateRepositoryTest {
 
     private static final String MOCKED_NAME1 = "Usuário de Teste 1";
     private static final String MOCKED_CPF1 = "12345678910";
@@ -26,7 +26,7 @@ public class AssociateRepositoryTest {
 
     @Test
     @DisplayName("Encontrar o associado pelo ID")
-    public void findAssociateById_Success_WhenIdExists() {
+    void findAssociateById_Success_WhenIdExists() {
         AssociateEntity associate = associateRepository.save(AssociateEntity.builder()
                                                                             .name(MOCKED_NAME1)
                                                                             .cpf(MOCKED_CPF1)
@@ -39,7 +39,7 @@ public class AssociateRepositoryTest {
 
     @Test
     @DisplayName("Não encontrar o associado quando o ID não existir")
-    public void findAssociateById_Fail_WhenIdDoesNotExist() {
+    void findAssociateById_Fail_WhenIdDoesNotExist() {
         Optional<AssociateEntity> optional = associateRepository.findById(1);
 
         Assertions.assertFalse(optional.isPresent(), "O associado não deveria ser encontrado com o ID inexistente");
@@ -47,7 +47,7 @@ public class AssociateRepositoryTest {
 
     @Test
     @DisplayName("Buscar todos os associados")
-    public void findAllAssociates_Success_WhenRequested() {
+    void findAllAssociates_Success_WhenRequested() {
         associateRepository.save(AssociateEntity.builder()
                                                 .name(MOCKED_NAME1)
                                                 .cpf(MOCKED_CPF1)

@@ -10,7 +10,6 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -20,15 +19,15 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.List;
 
-import static org.mockito.ArgumentMatchers.any;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
 @AutoConfigureMockMvc
 @DisplayName("AgendaControllerTest")
-public class AgendaControllerTest {
+class AgendaControllerTest {
     public static final String BASE_URL = "/api/v1/agenda";
 
     @Autowired
@@ -37,11 +36,8 @@ public class AgendaControllerTest {
     @Autowired
     private ObjectMapper objectMapper;
 
-    @Mock
     private AgendaDTO agendaDTO;
-    @Mock
     private AgendaResponseDTO agendaResponseDTO;
-    @Mock
     private AgendaResultResponseDTO agendaResultResponseDTO;
 
     @BeforeEach
@@ -71,7 +67,7 @@ public class AgendaControllerTest {
     @Test
     @DisplayName("Cria pauta com sucesso quando os dados são válidos")
     @Sql(scripts = "/db/testdata/resetDatabase.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
-    public void createAgenda_Success_WhenDataIsValid() throws Exception {
+    void createAgenda_Success_WhenDataIsValid() throws Exception {
         mockMvc.perform(post(BASE_URL).contentType(MediaType.APPLICATION_JSON_VALUE)
                                       .content(objectMapper.writeValueAsString(agendaDTO)))
                .andExpect(status().isCreated())

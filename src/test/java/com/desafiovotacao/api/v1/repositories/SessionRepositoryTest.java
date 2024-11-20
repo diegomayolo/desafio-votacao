@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
@@ -16,15 +15,13 @@ import java.util.Optional;
 
 @DataJpaTest
 @DisplayName("SessionRepositoryTest")
-public class SessionRepositoryTest {
+class SessionRepositoryTest {
     @Autowired
     private SessionRepository sessionRepository;
     @Autowired
     private AgendaRepository agendaRepository;
 
-    @Mock
     private SessionEntity sessionEntity;
-    @Mock
     private AgendaEntity agendaEntity;
 
     @BeforeEach
@@ -51,9 +48,9 @@ public class SessionRepositoryTest {
     @Test
     @DisplayName("Deve encontrar a sessão pelo agendaId")
     void findSessionsByAgendaId_Success_WhenSessionsExist() {
-        SessionEntity sessionEntity = sessionRepository.findByAgendaId(agendaEntity.getId());
+        SessionEntity foundSession = sessionRepository.findByAgendaId(agendaEntity.getId());
 
-        Assertions.assertNotNull(sessionEntity, "Sessão deveria ser encontrada para a pauta informada");
+        Assertions.assertNotNull(foundSession, "Sessão deveria ser encontrada para a pauta informada");
     }
 
     @Test

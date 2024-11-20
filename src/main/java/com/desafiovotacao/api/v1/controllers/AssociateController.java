@@ -42,10 +42,12 @@ public class AssociateController
     )
     @ApiResponse(
             responseCode = "201",
-            description = "Erro na requisição. Possíveis causas incluem:\n " +
-                          "1. Associado já cadastrado.\n " +
-                          "2. Dados inválidos fornecidos na requisição (ex: nome ou cpf inválido.).\n " +
-                          "Verifique os dados fornecidos.",
+            description = """
+                          Erro na requisição. Possíveis causas incluem:
+                          1. Associado já cadastrado.
+                          2. Dados inválidos fornecidos na requisição (ex: nome ou cpf inválido.).
+                          Verifique os dados fornecidos.
+                          """,
             content = @Content(mediaType = "text/plain",
                                schema = @Schema(implementation = String.class),
                                examples = @ExampleObject(value = "Associado já cadastrado"))

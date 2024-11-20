@@ -14,7 +14,7 @@ import java.util.Optional;
 @DataJpaTest
 @DisplayName("AgendaRepositoryTest")
 @RequiredArgsConstructor
-public class AgendaRepositoryTest {
+class AgendaRepositoryTest {
     private static final String MOCKED_TITLE = "Título";
     private static final String MOCKED_DESCRIPTION = "Descrição";
 
@@ -23,7 +23,7 @@ public class AgendaRepositoryTest {
 
     @Test
     @DisplayName("Encontrar o pauta pelo ID")
-    public void findAgendaById_Success_WhenIdExists() {
+    void findAgendaById_Success_WhenIdExists() {
         AgendaEntity agenda = agendaRepository.save(AgendaEntity.builder()
                                                                       .title(MOCKED_TITLE)
                                                                       .description(MOCKED_DESCRIPTION)
@@ -36,7 +36,7 @@ public class AgendaRepositoryTest {
 
     @Test
     @DisplayName("Não encontrar a pauta quando o ID não existir")
-    public void findAgendaById_Fail_WhenIdDoesNotExist() {
+    void findAgendaById_Fail_WhenIdDoesNotExist() {
         Optional<AgendaEntity> optional = agendaRepository.findById(1);
 
         Assertions.assertFalse(optional.isPresent(), "A pauta não deveria ser encontrada com o ID inexistente");
@@ -44,7 +44,7 @@ public class AgendaRepositoryTest {
 
     @Test
     @DisplayName("Deve buscar todas as pautas")
-    public void findAllAgendas_Success_WhenRequested() {
+    void findAllAgendas_Success_WhenRequested() {
         agendaRepository.save(AgendaEntity.builder()
                                           .title(MOCKED_TITLE)
                                           .description(MOCKED_DESCRIPTION)

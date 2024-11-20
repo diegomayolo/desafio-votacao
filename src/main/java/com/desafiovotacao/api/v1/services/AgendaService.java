@@ -41,9 +41,15 @@ public class AgendaService {
         long approveVotes = entities.stream().filter(v -> v.getVote()).count();
         long rejectedVotes = entities.stream().filter(v -> !v.getVote()).count();
 
-        AgendaStateEnum result = approveVotes > rejectedVotes ? AgendaStateEnum.APPROVED :
-                                 approveVotes < rejectedVotes ? AgendaStateEnum.REJECTED :
-                                                                AgendaStateEnum.TIE;
+        AgendaStateEnum result;
+
+        if (approveVotes > rejectedVotes) {
+            result = AgendaStateEnum.APPROVED;
+        } else if (approveVotes < rejectedVotes) {
+            result = AgendaStateEnum.REJECTED;
+        } else {
+            result = AgendaStateEnum.TIE;
+        }
 
         return new AgendaResultResponseDTO(agendaId,
                                            approveVotes,
@@ -54,7 +60,7 @@ public class AgendaService {
 
     public AgendaResponseDTO findById(Integer agendaId) {
         AgendaEntity agenda = agendaRepository.findById(agendaId)
-                                              .orElseThrow(() -> new AgendaNotFoundException());
+                                              .orElseThrow(AgendaNotFoundException::new);
 
         return AgendaMapper.toResponseDTO(agenda);
     }

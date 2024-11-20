@@ -36,7 +36,7 @@ public class SessionService {
 
     public SessionResponseDTO findById(Integer sessionId) {
         SessionEntity session = sessionRepository.findById(sessionId)
-                                                 .orElseThrow(() -> new SessionNotFoundException());
+                                                 .orElseThrow(SessionNotFoundException::new);
         
         return SessionMapper.toResponseDTO(session);
     }
@@ -47,7 +47,7 @@ public class SessionService {
     
     private AgendaEntity checkExistingAgenda(SessionDTO sessionDTO) {
         return agendaRepository.findById(sessionDTO.agendaId())
-                               .orElseThrow(() -> new AgendaNotFoundException());
+                               .orElseThrow(AgendaNotFoundException::new);
     }
 
     private void checkActiveSessions(SessionDTO sessionDTO) {

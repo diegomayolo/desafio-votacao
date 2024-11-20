@@ -6,6 +6,9 @@ import com.desafiovotacao.api.v1.entities.SessionEntity;
 import java.util.List;
 
 public class SessionMapper {
+
+    private SessionMapper() {}
+
     public static SessionResponseDTO toResponseDTO(SessionEntity session) {
         return new SessionResponseDTO(session.getAgenda().getId(),
                                       session.getDuration(),

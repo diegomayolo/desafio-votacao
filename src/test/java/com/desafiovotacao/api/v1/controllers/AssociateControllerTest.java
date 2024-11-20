@@ -26,7 +26,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 @DisplayName("AssociateControllerTest")
-public class AssociateControllerTest {
+class AssociateControllerTest {
 
     public static final String BASE_URL = "/api/v1/associate";
     
@@ -54,7 +54,7 @@ public class AssociateControllerTest {
     @Test
     @DisplayName("Criar associado com sucesso quando os dados são válidos")
     @Sql(scripts = "/db/testdata/resetDatabase.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
-    public void createAssociate_Success_WhenDataIsValid() throws Exception {
+    void createAssociate_Success_WhenDataIsValid() throws Exception {
         mockMvc.perform(post(BASE_URL).contentType(MediaType.APPLICATION_JSON)
                                       .content(objectMapper.writeValueAsString(responseDTO)))
                .andExpect(status().isCreated());
@@ -63,7 +63,7 @@ public class AssociateControllerTest {
    @Test
    @DisplayName("Falha ao criar associado com dados inválidos")
    @Sql(scripts = "/db/testdata/resetDatabase.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
-   public void createAssociate_Fail_WhenDataIsInvalid() throws Exception {
+   void createAssociate_Fail_WhenDataIsInvalid() throws Exception {
        associateDTO = AssociateDTO.builder().name("Associado Teste").cpf(null).build();
        
        mockMvc.perform(post(BASE_URL).contentType(MediaType.APPLICATION_JSON_VALUE)
@@ -75,7 +75,7 @@ public class AssociateControllerTest {
    @DisplayName("Encontra associado por ID com sucesso")
    @Sql(scripts = "/db/testdata/insertAssociate.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
    @Sql(scripts = "/db/testdata/resetDatabase.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
-   public void findAssociateById_Success_WhenIdExists() throws Exception {
+   void findAssociateById_Success_WhenIdExists() throws Exception {
        mockMvc.perform(get(BASE_URL + "/{associateId}", 1)).andExpect(status().isOk())
                                                                     .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE)) 
                                                                     .andExpect(content().json(objectMapper.writeValueAsString(responseDTO)));
@@ -84,7 +84,7 @@ public class AssociateControllerTest {
     @Test
     @DisplayName("Retorna erro 400 quando ID do associado não existe")
     @Sql(scripts = "/db/testdata/resetDatabase.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
-    public void findAssociateById_Fail_WhenIdDoesNotExist() throws Exception {
+    void findAssociateById_Fail_WhenIdDoesNotExist() throws Exception {
         int nonExistentAssociateId = 1;
 
         mockMvc.perform(get(BASE_URL + "/{associateId}", nonExistentAssociateId))
@@ -97,7 +97,7 @@ public class AssociateControllerTest {
    @DisplayName("Retorna todos os associados com sucesso")
    @Sql(scripts = "/db/testdata/insertAssociate.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
    @Sql(scripts = "/db/testdata/resetDatabase.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
-   public void findAllAssociates_Success_WhenRequested() throws Exception {
+   void findAllAssociates_Success_WhenRequested() throws Exception {
        mockMvc.perform(get(BASE_URL)).andExpect(status().isOk())
                                      .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
                                      .andExpect(content().json(objectMapper.writeValueAsString(List.of(responseDTO))));

@@ -45,10 +45,12 @@ public class VoteController {
     )
     @ApiResponse(
             responseCode = "400",
-            description = "Erro na requisição. Possíveis causas incluem:\n " +
-                          "1. Associado já registrou voto nesta pauta.\n " +
-                          "2. A sessão de votação está fechada.\n " +
-                          "3. Dados inválidos fornecidos na requisição (ex: associado ou pauta inexistente.",
+            description = """
+                          "Erro na requisição. Possíveis causas incluem:"
+                          "1. Associado já registrou voto nesta pauta."
+                          "2. A sessão de votação está fechada."
+                          "3. Dados inválidos fornecidos na requisição (ex: associado ou pauta inexistente."
+                          """,
             content = @Content(mediaType = "text/plain", 
                                schema = @Schema(implementation = String.class),
                                examples = @ExampleObject(value = "A sessão de votação está encerrada."))

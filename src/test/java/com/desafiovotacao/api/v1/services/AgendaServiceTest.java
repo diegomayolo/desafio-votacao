@@ -26,7 +26,7 @@ import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 @DisplayName("AgendaServiceTest")
-public class AgendaServiceTest {
+class AgendaServiceTest {
     private static final String MOCKED_TITLE = "Título";
     private static final String MOCKED_DESCRIPTION = "Descrição";
 
@@ -41,7 +41,7 @@ public class AgendaServiceTest {
 
     @Test
     @DisplayName("Deve criar pauta com sucesso quando os dados são válidos")
-    public void createAgenda_Success_WhenValidInput() {
+    void createAgenda_Success_WhenValidInput() {
         AgendaEntity agenda = buildAgendaEntity();
         AgendaDTO agendaDTO = new AgendaDTO(MOCKED_TITLE, MOCKED_DESCRIPTION);
 
@@ -56,7 +56,7 @@ public class AgendaServiceTest {
 
     @Test
     @DisplayName("Deve encontrar pauta por ID quando ID existe")
-    public void findAgendaById_Success_WhenIdExists() {
+    void findAgendaById_Success_WhenIdExists() {
         AgendaEntity agendaEntity = buildAgendaEntity();
 
         when(agendaRepository.findById(1)).thenReturn(Optional.of(agendaEntity));
@@ -79,7 +79,7 @@ public class AgendaServiceTest {
 
     @Test
     @DisplayName("Deve buscar todas as pautas")
-    public void findAllAgendas_Success_WhenRequested() {
+    void findAllAgendas_Success_WhenRequested() {
         List<AgendaEntity> agendaEntities = List.of(
             buildAgendaEntity(),
             buildAgendaEntity()
@@ -94,7 +94,7 @@ public class AgendaServiceTest {
 
     @Test
     @DisplayName("Deve retornar o resultado da pauta quando o ID existe")
-    public void getResult_Success_WhenAgendaIdExists() {
+    void getResult_Success_WhenAgendaIdExists() {
         Integer agendaId = 1;
         List<VoteEntity> voteEntities = List.of(
                 VoteEntity.builder().vote(true).agenda(new AgendaEntity()).associate(new AssociateEntity()).build(),
@@ -117,7 +117,7 @@ public class AgendaServiceTest {
 
     @Test
     @DisplayName("Deve lançar exceção quando o ID da pauta não existe")
-    public void getResult_Fail_WhenIdDoesNotExist() {
+    void getResult_Fail_WhenIdDoesNotExist() {
         Integer invalidAgendaId = 999;
         when(agendaRepository.existsById(invalidAgendaId)).thenReturn(false);
 

@@ -6,6 +6,9 @@ import com.desafiovotacao.api.v1.entities.AgendaEntity;
 import java.util.List;
 
 public class AgendaMapper {
+
+    private AgendaMapper() {}
+
     public static AgendaResponseDTO toResponseDTO(AgendaEntity entity) {
         return new AgendaResponseDTO(entity.getId(),
                                      entity.getTitle(),

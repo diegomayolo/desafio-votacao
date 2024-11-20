@@ -4,14 +4,13 @@ import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 import org.hibernate.validator.internal.constraintvalidators.hv.br.CNPJValidator;
 import org.hibernate.validator.internal.constraintvalidators.hv.br.CPFValidator;
-import org.springframework.util.StringUtils;
 
 public class CpfOrCnpjValidator implements ConstraintValidator<CpfOrCnpj, String> {
+    
     @Override
     public boolean isValid( String value, ConstraintValidatorContext context )
     {
-        if( StringUtils.isEmpty( value ))
-        {
+        if (value == null || value.trim().isEmpty()) {
             return true;
         }
 
